@@ -35,11 +35,45 @@ async function registerUser(req, res) {
     token,
   });
 }
-async function loginUser(req, res) {}
+async function loginUser(req, res) {
+    const {email,password}=req.body;
+
+    const user=await usermodel.findOne({email});
+
+    if(!user){
+        return res.status(400).json({
+            message:"invaild email "
+        })
+    }
+    const isPasswordVaild=await bcrypt.compare(password,user.password);
+
+    if(!isPasswordVaild){
+         return res.status(400).json({
+            message:"invaild  password"
+        })
+    }
+
+    const token =jwt.sign({
+        id:user._id
+    },process.env.JWT_SECRET)
+
+    res.cookie("jwt_token",token);
+    res.status(200).json({
+        message:"user logged in successfully"
+    })
+}
+
+async function logoutUser(req,res){
+    res.clearCookie("jwt_token");
+    res.status(200).json({
+        message:"user logged out successfully"
+    })
+}
 
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 }; // object me islye pass kiya coz ek file ek hi cheez export
 // kar skti he but humare pass bhohot sare controller function
 // he islye object me unko dal ke object ko return karwa diya
