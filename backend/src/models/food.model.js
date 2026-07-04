@@ -24,4 +24,4 @@ const foodSchema=new mongoose.Schema({
 
 const foodmodel=mongoose.model("foods",foodSchema)
 
-module.exports=foodSchema;
+module.exports=foodmodel;
