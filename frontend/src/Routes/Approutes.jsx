@@ -1,17 +1,21 @@
-import React from 'react'
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import UserRegisterForm from "../components/UserRegisterForm";
+import UserLoginForm from "../components/UserLoginForm";
+import FoodPartnerRegisterForm from "../components/FoodPartnerRegisterForm";
+import FoodPartnerLoginForm from "../components/FoodPartnerLoginForm";
+
 const Approutes = () => {
   return (
-   <Router>
-    <Routes>
-        <Route path='/user/register' element={<h1>user register form</h1>}></Route>
-        <Route path='/user/login' element={<h1>user login form</h1>}></Route>
-         <Route path='/food-partner/register' element={<h1>food partner register form</h1>}></Route>
-        <Route path='/food-partner/login' element={<h1>food partner login form</h1>}></Route>
+    <Router>
+      <Routes>
+        <Route path="/user/register" element={<UserRegisterForm />} />
+        <Route path="/user/login" element={<UserLoginForm />} />
+        <Route path="/food-partner/register" element={<FoodPartnerRegisterForm />} />
+        <Route path="/food-partner/login" element={<FoodPartnerLoginForm />} />
+      </Routes>
+    </Router>
+  );
+};
 
-    </Routes>
-   </Router>
-  )
-}
-
-export default Approutes
+export default Approutes;
