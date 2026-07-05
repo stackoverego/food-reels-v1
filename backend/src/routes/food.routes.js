@@ -14,4 +14,7 @@ const upload= multer({
 router.post("/",foodMiddleware.authFoodMiddleware,upload.single("video"),foodController.createFood);
 
 
-module.exports=router
+//user will first get verified then all the fooditems inside the database will be fetched.
+router.get('/',foodMiddleware.authUserMiddleware,foodController.getFood);
+
+module.exports=router;

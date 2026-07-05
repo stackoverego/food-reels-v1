@@ -17,6 +17,15 @@ async function createFood(req,res){
     })
 }
 
+async function getFood(req,res){
+    const fooditem=await foodmodel.find({});
+    res.status(200).json({
+        meassage:"successfully recieved all food items",
+        fooditem
+    })
+}
+
 module.exports={
-    createFood
+    createFood,
+    getFood
 }
