@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState} from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const fields = [
-  { name: "fullName", label: "Full name", type: "text", placeholder: "Alex Morgan" },
-  { name: "email", label: "Email", type: "email", placeholder: "alex@email.com" },
-  { name: "password", label: "Password", type: "password", placeholder: "Create a password" },
-];
 
 const UserRegisterForm = () => {
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const navigate=useNavigate();
+
+  const handleSumbit=async(e)=>{
+    e.preventDefault();
+    const response=await axios.post("http://localhost:3000/api/auth/user/register",{
+      name,
+      email,
+      password
+    },{
+      withCredentials:true,
+    }
+  )
+  navigate('/');
+    
+  }
+
+
   return (
     <div className="auth-page">
       <div className="auth-hero">
@@ -25,15 +43,23 @@ const UserRegisterForm = () => {
             <p>Start exploring delicious picks that fit your taste.</p>
           </div>
 
-          <form className="auth-form">
-            {fields.map((field) => (
-              <label className="auth-field" key={field.name}>
-                <span>{field.label}</span>
-                <input type={field.type || "text"} name={field.name} placeholder={field.placeholder} />
-              </label>
-            ))}
+          <form className="auth-form" onSubmit={handleSumbit}>
+            <label className="auth-field">
+              <span>Full name</span>
+              <input type="text" name="name" value={name} onChange={(e)=>{setname(e.target.value)}} placeholder="Alex Morgan" />
+            </label>
 
-            <button type="button" className="auth-submit">
+            <label className="auth-field">
+              <span>Email</span>
+              <input type="email" name="email" value={email}  onChange={(e)=>{setemail(e.target.value)}} placeholder="alex@email.com" />
+            </label>
+
+            <label className="auth-field">
+              <span>Password</span>
+              <input type="password" name="password" value={password}  onChange={(e)=>{setpassword(e.target.value)}} placeholder="Create a password" />
+            </label>
+
+            <button type="sumbit" className="auth-submit">
               Sign up
             </button>
           </form>
