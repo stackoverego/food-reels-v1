@@ -19,7 +19,7 @@ const FoodPartnerRegisterForm = () => {
       },{
         withCredentials:true,
       })
-      navigate("/");
+      navigate("/createFood");
     }
 
   return (
