@@ -1,11 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const fields = [
-  { name: "email", label: "Email", type: "email", placeholder: "alex@email.com" },
-  { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
-];
 
 const UserLoginForm = () => {
+  const navigate=useNavigate();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const response = await axios.post("http://localhost:3000/api/auth/user/login",{
+        email,
+        password
+    },{
+      withCredentials:true,
+    })
+    navigate("/");
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-hero">
@@ -24,15 +37,30 @@ const UserLoginForm = () => {
             <p>Continue discovering meals that feel right for you.</p>
           </div>
 
-          <form className="auth-form">
-            {fields.map((field) => (
-              <label className="auth-field" key={field.name}>
-                <span>{field.label}</span>
-                <input type={field.type || "text"} name={field.name} placeholder={field.placeholder} />
-              </label>
-            ))}
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <label className="auth-field">
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+                placeholder="alex@email.com"
+              />
+            </label>
 
-            <button type="button" className="auth-submit">
+            <label className="auth-field">
+              <span>Password</span>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                placeholder="Enter your password"
+              />
+            </label>
+
+            <button type="submit" className="auth-submit">
               Log in
             </button>
           </form>

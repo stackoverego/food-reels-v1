@@ -1,11 +1,24 @@
-import React from "react";
-
-const fields = [
-  { name: "email", label: "Email", type: "email", placeholder: "team@goldenspoon.com" },
-  { name: "password", label: "Password", type: "password", placeholder: "Enter your password" },
-];
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FoodPartnerLoginForm = () => {
+    const navigate=useNavigate();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    const response = await axios.post("http://localhost:3000/api/auth/foodpartner/login",{
+        email,
+        password
+    },{
+      withCredentials:true,
+    })
+    navigate("/");
+  };
+
+
   return (
     <div className="auth-page">
       <div className="auth-hero">
@@ -24,15 +37,18 @@ const FoodPartnerLoginForm = () => {
             <p>Manage your profile and keep service smooth and simple.</p>
           </div>
 
-          <form className="auth-form">
-            {fields.map((field) => (
-              <label className="auth-field" key={field.name}>
-                <span>{field.label}</span>
-                <input type={field.type || "text"} name={field.name} placeholder={field.placeholder} />
-              </label>
-            ))}
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <label className="auth-field">
+              <span>Email</span>
+              <input type="email" name="email"  onChange={(e)=>{setemail(e.target.value)}} placeholder="team@goldenspoon.com" />
+            </label>
 
-            <button type="button" className="auth-submit">
+            <label className="auth-field">
+              <span>Password</span>
+              <input type="password" name="password" onChange={(e)=>{setpassword(e.target.value)}} placeholder="Enter your password" />
+            </label>
+
+            <button type="submit" className="auth-submit">
               Continue
             </button>
           </form>
