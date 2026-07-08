@@ -5,7 +5,8 @@ import UserLoginForm from "../components/UserLoginForm";
 import FoodPartnerRegisterForm from "../components/FoodPartnerRegisterForm";
 import FoodPartnerLoginForm from "../components/FoodPartnerLoginForm";
 import Home from "../general/Home";
-import Createfood from "../components/Createfood";
+import Createfood from "../food-partner/Createfood";
+import Profile from "../food-partner/Profile";
 
 const Approutes = () => {
   return (
@@ -15,8 +16,9 @@ const Approutes = () => {
         <Route path="/user/login" element={<UserLoginForm />} />
         <Route path="/food-partner/register" element={<FoodPartnerRegisterForm />} />
         <Route path="/food-partner/login" element={<FoodPartnerLoginForm />} />
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/createFood" element={<Createfood/>}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/createFood" element={<Createfood />}></Route>
+        <Route path="/foodpartner/:id" element={<Profile />}></Route>
       </Routes>
     </Router>
   );

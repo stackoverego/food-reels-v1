@@ -68,7 +68,7 @@ const Home = () => {
             <div className="reel-overlay">
               <div className="reel-copy">
                 <p className="reel-description">{reel.description}</p>
-                <Link className="reel-cta" to={`/api/foodpartner/${reel.foodpartner}`}>
+                <Link className="reel-cta" to={`/foodpartner/${reel.foodpartner}`}>
                   Visit store
                 </Link>
               </div>

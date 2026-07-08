@@ -15,7 +15,7 @@ const FoodPartnerRegisterForm = () => {
     const handleSubmit=async(e)=>{
       e.preventDefault();
       const response=await axios.post("http://localhost:3000/api/auth/foodpartner/register",{
-        email,password,restaurantName,contactName,phone,address
+        name:restaurantName,contactName,phone,address,email,password
       },{
         withCredentials:true,
       })

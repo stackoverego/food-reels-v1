@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const authrouter = require("./routes/auth.routes");
 const foodrouter = require("./routes/food.routes");
+const foodpartnerrouter=require('./routes/food-partner.routes')
 const cors = require("cors");
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(cookieParser()); // to save the token in cookie storage
 
 app.use("/api/auth", authrouter);
 app.use("/api/food", foodrouter);
+app.use('/api/food-partner',foodpartnerrouter)
 
 module.exports = app;
